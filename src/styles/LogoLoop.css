@@ -1,96 +1,128 @@
 /* ============================= */
-/* ===== Clients Section ======= */
+/* ===== Clients Section (Premium Light) ===== */
 /* ============================= */
 
 .clients-section {
   position: relative;
-  padding: 120px 0;
-  background: #0f172a; /* deep slate */
+  padding: 60px 0;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #fffaff 40%,
+    #fdf4ff 100%
+  );
   overflow: hidden;
+
+  border-top: 1px solid rgba(168, 85, 247, 0.15);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.15);
 }
 
-/* Subtle radial glow accents */
+/* Decorative top divider glow */
 .clients-section::before {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 70%);
-  top: -200px;
-  left: -200px;
-  z-index: 0;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(168, 85, 247, 0.6),
+    transparent
+  );
+  z-index: 2;
 }
 
+/* Soft gradient blobs */
 .clients-section::after {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25), transparent 70%);
-  bottom: -200px;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+  bottom: -250px;
   right: -200px;
   z-index: 0;
+  filter: blur(90px);
+}
+
+/* Additional subtle blob */
+.clients-section .blob-left {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.18), transparent 70%);
+  top: -250px;
+  left: -200px;
+  z-index: 0;
+  filter: blur(90px);
 }
 
 .clients-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* ============================= */
-/* ===== Premium Clients Header ===== */
+/* ===== Clients Header ===== */
 /* ============================= */
 
 .clients-header {
   text-align: center;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
   max-width: 820px;
   margin-inline: auto;
 }
 
-/* Small Premium Tag Style */
-.clients-subtitle {
-  display: inline-block;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 999px;
-  margin-bottom: 24px;
-}
-
-/* Main Title */
 .clients-title {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700;
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 800;
   line-height: 1.1;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   margin: 0;
-  color: #f1f5f9;
 
-  /* Soft Premium Glow */
-  text-shadow: 0 0 40px rgba(56, 189, 248, 0.15);
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #ec4899,
+    #f97316
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientShift 6s linear infinite;
 }
 
-/* Premium Description Text */
+/* Smooth gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
 .clients-description {
-  margin-top: 22px;
-  font-size: clamp(16px, 2vw, 20px);
-  line-height: 1.7;
-  max-width: 680px;
+  margin-top: 28px;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.8;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
-  color: #94a3b8;
+
+  color: #4b5563;
   font-weight: 400;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+
+  opacity: 0.9;
 }
+
+
+
 /* ============================= */
 /* ===== LogoLoop Container ==== */
 /* ============================= */
@@ -98,13 +130,27 @@
 .logoloop {
   position: relative;
   overflow: hidden;
-  padding: 50px 0;
+  padding: 70px 0;
 
-  /* Glass Effect */
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+
+  border: 1px solid rgba(168, 85, 247, 0.08);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover lift effect */
+.logoloop:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 25px 60px rgba(168, 85, 247, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 /* Fade edges */
@@ -121,12 +167,12 @@
 
 .logoloop--fade::before {
   left: 0;
-  background: linear-gradient(to right, #0f172a, transparent);
+  background: linear-gradient(to right, #fffaff, transparent);
 }
 
 .logoloop--fade::after {
   right: 0;
-  background: linear-gradient(to left, #0f172a, transparent);
+  background: linear-gradient(to left, #fffaff, transparent);
 }
 
 /* ============================= */
@@ -147,6 +193,7 @@
   padding: 0 60px;
   margin: 0;
 }
+
 /* ============================= */
 /* ===== Logo Items ============ */
 /* ============================= */
@@ -163,24 +210,21 @@
   width: auto;
   object-fit: contain;
 
-  /* Default: grey */
   filter: grayscale(100%);
-  opacity: 0.85;
+  opacity: 0.7;
 
-  /* Smooth transition */
   transition: transform 0.4s cubic-bezier(.4,0,.2,1),
               opacity 0.4s cubic-bezier(.4,0,.2,1),
               filter 0.4s cubic-bezier(.4,0,.2,1);
 }
 
-/* On hover: restore original color */
+/* Hover effect */
 .logoloop__item:hover img {
   filter: grayscale(0%);
   opacity: 1;
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
-/* Gentle lift effect */
 .logoloop__item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }

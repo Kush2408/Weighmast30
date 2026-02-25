@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
 import { Monitor, Smartphone, Globe, Shield } from 'lucide-react';
 import loginScreenImage from './figma/login.webp'
-import receiptSettingsImage from './figma/receiptsetting.webp';
+
 
 export const ProductShowcase = () => {
   const sectionRef = useRef(null);
@@ -58,7 +58,7 @@ export const ProductShowcase = () => {
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
             Modern Interface,
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#0F4C81] via-[#0F5F8A] to-[#0F7173] bg-clip-text text-transparent">
               Powerful Performance
             </span>
           </h2>
@@ -138,7 +138,7 @@ export const ProductShowcase = () => {
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -159,50 +159,6 @@ export const ProductShowcase = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Secondary Image Showcase */}
-        <motion.div
-          className="grid lg:grid-cols-2 gap-8 items-center"
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <div className="space-y-6">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
-              Customizable & Scalable
-            </h3>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Configure every aspect of your weighbridge software to match your 
-              business requirements. Scale from single to multiple sites seamlessly.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {['Receipt Templates', 'Custom Reports', 'User Roles', 'API Access'].map((tag, index) => (
-                <motion.div
-                  key={tag}
-                  className="px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-200/50 text-sm font-semibold text-gray-700"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {tag}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
-            className="relative rounded-3xl overflow-hidden border border-gray-200/60 shadow-2xl"
-            whileHover={{ scale: 1.02, rotateY: 2 }}
-            transition={{ duration: 0.4 }}
-          >
-            <img
-              src={receiptSettingsImage}
-              alt="Receipt Configuration"
-              className="w-full h-auto"
-            />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

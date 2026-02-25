@@ -51,6 +51,7 @@ export const Navbar = () => {
     { label: 'Features', href: '#features' },
     { label: 'Benefits', href: '#benefits' },
     { label: 'Solutions', href: '#solutions' },
+    { label: 'Pricing', href: '#pricing' },
   ];
 
   return (
@@ -123,7 +124,7 @@ export const Navbar = () => {
             >
               <motion.a
                 href="#demo"
-                className={`px-6 py-4 rounded-[50px] font-semibold text-sm uppercase tracking-[1.5px] transition-all duration-500 
+                className={`px-6 py-3 rounded-[50px] font-semibold text-md font-semibold transition-all duration-500 
                 ${isScrolled
                     ? 'bg-sky-100 text-sky-800 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-sky-600 hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'
                     : 'bg-white text-gray-900 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-purple-600 hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'

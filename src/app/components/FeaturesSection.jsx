@@ -28,42 +28,42 @@ export const FeaturesSection = () => {
       title: 'Automated Weighing',
       description: 'Seamlessly capture weight data from any weighbridge with automated integration. Eliminate manual data entry and reduce human error.',
       color: 'blue',
-      image: transactionViewImage,
+      // image: transactionViewImage,
     },
     {
       icon: Truck,
       title: 'Vehicle Management',
       description: 'Complete vehicle tracking with tare weight management, driver information, and automatic vehicle recognition for faster processing.',
       color: 'purple',
-      image: vehicleManagementImage,
+      // image: vehicleManagementImage,
     },
     {
       icon: Shield,
       title: 'Fraud Prevention',
       description: 'Built-in security measures including CCTV integration, QR code verification, and audit trails to prevent weighing fraud.',
       color: 'red',
-      image: userManagementImage,
+      // image: userManagementImage,
     },
     {
       icon: BarChart3,
       title: 'Real-Time Analytics',
       description: 'Comprehensive dashboards with live transaction monitoring, weight trends, and operational insights at your fingertips.',
       color: 'green',
-      image: transactionViewImage,
+      // image: transactionViewImage,
     },
     {
       icon: FileText,
       title: 'Smart Reporting',
       description: 'Generate detailed reports with customizable templates. Export to PDF, Excel, or integrate with your existing systems.',
       color: 'orange',
-      image: vehicleManagementImage,
+      // image: vehicleManagementImage,
     },
     {
       icon: Database,
       title: 'Data Management',
       description: 'Centralized database for all weighing records with powerful search, filtering, and data export capabilities.',
       color: 'indigo',
-      image: userManagementImage,
+      // image: userManagementImage,
     },
   ];
 
@@ -94,18 +94,18 @@ export const FeaturesSection = () => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full border border-blue-200/50 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#0F4C81]/10 to-[#0F7173]/10 backdrop-blur-sm rounded-full border border-[#0F4C81]/20 mb-6"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Zap className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-700">Powerful Features</span>
+            <span className="text-sm font-semibold text-gray-700">Powerful Features</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
             Everything You Need for
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-[#0F4C81] via-[#0F5F8A] to-[#0F7173] bg-clip-text text-transparent">
               Efficient Weighing
             </span>
           </h2>
@@ -147,18 +147,6 @@ export const FeaturesSection = () => {
                   {feature.description}
                 </p>
 
-                {/* OPTIMIZED: Feature Image Preview with lazy loading */}
-                <div className="relative overflow-hidden rounded-xl border border-gray-200/60 aspect-video">
-                  <motion.img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
 
                 {/* Hover arrow */}
                 <motion.div

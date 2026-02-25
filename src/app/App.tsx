@@ -6,9 +6,9 @@ import { HeroSection } from "./components/HeroSection";
 import { Footer } from "./components/Footer";
 import React from "react";
 import SplitText from "./components/SplitText";
+import GradientText from "./components/GradientText";
+
 // Lazy loaded sections
-
-
 const FeaturesSection = lazy(() =>
   import("./components/FeaturesSection").then(module => ({ default: module.FeaturesSection }))
 );
@@ -26,6 +26,10 @@ const TestimonialsSection = lazy(() =>
 );
 const CTASection = lazy(() =>
   import("./components/CTASection").then(module => ({ default: module.CTASection }))
+);
+
+const PricingSection = lazy(() =>
+  import("./components/Pricing")
 );
 
 const LogoLoop = lazy(() =>
@@ -53,19 +57,19 @@ function App() {
         <Suspense fallback={<div className="h-20" />}>
           <FeaturesSection />
           <BenefitsSection />
+          <PricingSection />
           <ProductShowcase />
           <UseCasesSection />
           <TestimonialsSection />
           <section className="clients-section">
             <div className="clients-container">
+
               <div className="clients-header">
                 <h2 className="clients-title">
-                  <SplitText text="Our Clients" />
+                  <GradientText>
+                    <SplitText text="Trusted By" />
+                  </GradientText>
                 </h2>
-                <p className="clients-description">
-                  Trusted by high-growth startups and global enterprises to scale faster,
-                  operate smarter, and lead their industries.
-                </p>
               </div>
               <LogoLoop
                 logoHeight={50}
@@ -75,6 +79,7 @@ function App() {
                 fadeOut
                 scaleOnHover
               />
+
             </div>
           </section>
           <CTASection />

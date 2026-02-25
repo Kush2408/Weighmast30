@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Shield, Zap, BarChart3, CheckCircle2 } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
-import dashboardImage from './figma/dashboard.webp';
+import dashboardVideo from "./figma/dashboardanimated_P.mov";
 
 export const HeroSection = () => {
   const containerRef = useRef(null);
@@ -12,7 +12,7 @@ export const HeroSection = () => {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+ const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.25]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.96]);
 
   return (
@@ -21,9 +21,9 @@ export const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* OPTIMIZED: Animated gradient orbs with reduced blur and longer durations
-          - Blur reduced from 120px/100px/90px to 60px (reduces GPU pressure)
-          - Durations increased significantly (less frequent repaints)
-          - Only uses transform (GPU accelerated) */}
+      - Blur reduced from 120px/100px/90px to 60px (reduces GPU pressure)
+      - Durations increased significantly (less frequent repaints)
+      - Only uses transform (GPU accelerated) */}
       <motion.div
         className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[60px]"
         animate={{
@@ -68,36 +68,36 @@ export const HeroSection = () => {
       />
 
       <motion.div
-        className="max-w-7xl mx-auto px-6 lg:px-8 py-24 md:py-32 relative z-10"
+        className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 md:pt-20 pb-24 relative z-10"
         style={{ opacity, scale }}
       >
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="space-y-8 lg:space-y-10">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-50 to-purple-50 backdrop-blur-sm rounded-full border border-blue-200/50"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#0F4C81]/10 to-[#0F7173]/10 backdrop-blur-sm rounded-full border border-[#0F4C81]/20"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Zap className="w-4 h-4 text-blue-600" />
+              <Zap className="w-4 h-4 text-[#0F4C81]" />
               <span className="text-sm font-medium text-gray-700">
                 Enterprise-Grade Weighbridge Management
               </span>
             </motion.div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               <motion.h1
                 className="text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="block text-gray-900 font-bold">
-                  Complete Weighbridge
+                <span className="block bg-gradient-to-r from-[#0F4C81] via-[#0F5F8A] to-[#0F7173] bg-clip-text text-transparent font-bold">
+                  Advanced Weighbridge Software
                 </span>
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 bg-clip-text text-transparent font-bold">
-                  Software Solution
+                <span className="block text-gray-900 font-bold">
+                  for High-Precision Industrial Data
                 </span>
               </motion.h1>
 
@@ -107,9 +107,7 @@ export const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                Streamline your weighing operations with automated data capture, 
-                real-time monitoring, and advanced reporting. Eliminate manual errors 
-                and boost operational efficiency.
+                Stop relying on manual ticketing. Our enterprise-grade Weighbridge Software provides a secure "Intelligence Layer" for your weighing operations, ensuring 100% data integrity and real-time visibility across all sites.
               </motion.p>
             </div>
 
@@ -124,6 +122,7 @@ export const HeroSection = () => {
                 { icon: Shield, text: 'Fraud Prevention', color: 'blue' },
                 { icon: BarChart3, text: 'Real-Time Analytics', color: 'purple' },
                 { icon: CheckCircle2, text: 'Automated Reporting', color: 'green' },
+                { icon: Shield, text: 'Universal hardware support', color: 'gray' },
               ].map((feature, index) => (
                 <motion.div
                   key={feature.text}
@@ -146,7 +145,7 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold cursor-pointer">
+              <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-[#0F4C81] to-[#0F7173] text-white rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold cursor-pointer">
                 <span>Start Free Trial</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
@@ -193,38 +192,34 @@ export const HeroSection = () => {
             style={{ y }}
           >
             <div className="relative">
-            {/* OPTIMIZED: Glow effect with reduced blur
-                - Reduced from blur-[80px] to blur-[50px]
-                - Opacity animation is subtle and smooth */}
-              <motion.div 
-                className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-red-500/20 blur-[50px] rounded-3xl"
+              <motion.div
+                className="absolute -inset-4 bg-gradient-to-r from-[#0F4C81]/25 to-[#0F7173]/25 blur-[50px] rounded-3xl"
                 animate={{
                   opacity: [0.4, 0.6, 0.4],
                 }}
                 transition={{
-                  duration: 6, // Increased from 4s for smoother animation
+                  duration: 6,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
                 style={{ willChange: 'opacity' }}
               />
-              
-               {/* OPTIMIZED: Dashboard mockup with reduced blur effect
-                   - Reduced backdrop-blur from xl to md (lighter effect, better performance)
-                   - Removed 3D rotations (rotateY/rotateX) - use only scale for 60fps
-                   - Added will-change for optimization */}
-               <motion.div
-                className="relative bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-200/60 overflow-hidden"
-                whileHover={{ 
+
+              <motion.div
+                className="relative bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-200/60 overflow-hidden mb-30"
+                whileHover={{
                   scale: 1.02,
                 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 style={{ willChange: 'transform' }}
               >
-                <div className="p-4 md:p-6">
-                  <motion.img
-                    src={dashboardImage}
-                    alt="Weighmast Dashboard Interface"
+                <div>
+                  <motion.video
+                    src={dashboardVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="w-full h-auto rounded-2xl shadow-lg"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -233,20 +228,13 @@ export const HeroSection = () => {
                 </div>
               </motion.div>
 
-               {/* OPTIMIZED: Floating info cards with reduced animations
-                   - Reduced backdrop-blur from xl to md
-                   - Reduced floating animation from 3px range to subtle
-                   - Increased duration to reduce repaints
-                   - Only animate opacity on mount, not continuous floating */}
-               <motion.div
+              <motion.div
                 className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/60 p-4 md:p-5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
                 style={{ willChange: 'opacity' }}
               >
-                {/* Removed continuous floating animation - replaced with static content
-                    Floating animations are expensive and reduce from 60fps to lower rates */}
                 <div className="text-sm text-gray-600 font-medium">Today's Volume</div>
                 <div className="text-2xl md:text-3xl font-bold text-gray-900 mt-1">4,847 <span className="text-lg text-gray-600">tons</span></div>
                 <div className="text-xs text-green-600 font-medium mt-1">↑ 12% vs yesterday</div>
@@ -259,9 +247,8 @@ export const HeroSection = () => {
                 transition={{ duration: 0.8, delay: 1.4 }}
                 style={{ willChange: 'opacity' }}
               >
-                {/* Removed continuous floating animation */}
                 <div className="text-sm text-gray-600 font-medium">Efficiency Gain</div>
-                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mt-1">+32%</div>
+                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0F4C81] to-[#0F7173] bg-clip-text text-transparent mt-1">+32%</div>
                 <div className="text-xs text-gray-600 font-medium mt-1">This month</div>
               </motion.div>
             </div>
@@ -269,10 +256,6 @@ export const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* OPTIMIZED: Scroll indicator with reduced animation
-          - Increased duration from 1.5s to 3s (less frequent repaints)
-          - Reduced y range from 8px to 4px
-          - Uses only transform (GPU accelerated) */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: -10 }}
