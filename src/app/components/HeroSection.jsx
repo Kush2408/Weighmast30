@@ -1,8 +1,8 @@
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Shield, Zap, BarChart3, CheckCircle2 } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
-import { useRef } from 'react';
-import dashboardImage from 'figma:asset/8dcf3b68c1ef75815fcc9530c2de052b0a19c40d.png';
+import dashboardImage from './figma/dashboard.webp';
 
 export const HeroSection = () => {
   const containerRef = useRef(null);
@@ -18,47 +18,53 @@ export const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated gradient orbs */}
+      {/* OPTIMIZED: Animated gradient orbs with reduced blur and longer durations
+          - Blur reduced from 120px/100px/90px to 60px (reduces GPU pressure)
+          - Durations increased significantly (less frequent repaints)
+          - Only uses transform (GPU accelerated) */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[120px]"
+        className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[60px]"
         animate={{
           x: [0, 100, 0],
           y: [0, -50, 0],
           scale: [1, 1.2, 1],
         }}
         transition={{
-          duration: 25,
+          duration: 50, // Increased from 25s
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
       />
       <motion.div
-        className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-purple-400/15 rounded-full blur-[100px]"
+        className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-purple-400/15 rounded-full blur-[60px]"
         animate={{
           x: [0, -50, 0],
           y: [0, 100, 0],
           scale: [1, 1.15, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 45, // Increased from 20s
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-red-400/10 rounded-full blur-[90px]"
+        className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-red-400/10 rounded-full blur-[60px]"
         animate={{
           x: [0, 50, 0],
           y: [0, -30, 0],
           scale: [1, 1.1, 1],
         }}
         transition={{
-          duration: 18,
+          duration: 40, // Increased from 18s
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
       />
 
       <motion.div
@@ -140,13 +146,13 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 text-white rounded-full hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold">
+              <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold cursor-pointer">
                 <span>Start Free Trial</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </MagneticButton>
 
               <motion.button
-                className="px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 rounded-full border border-gray-300/60 hover:bg-white hover:border-gray-400 transition-all duration-300 shadow-sm hover:shadow-md font-semibold"
+                className="px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-900 rounded-full border border-gray-300/60 hover:bg-white hover:border-gray-400 transition-all duration-300 shadow-sm hover:shadow-md font-semibold cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -187,29 +193,33 @@ export const HeroSection = () => {
             style={{ y }}
           >
             <div className="relative">
-              {/* Animated glow effect */}
+            {/* OPTIMIZED: Glow effect with reduced blur
+                - Reduced from blur-[80px] to blur-[50px]
+                - Opacity animation is subtle and smooth */}
               <motion.div 
-                className="absolute -inset-4 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-red-500/30 blur-[80px] rounded-3xl"
+                className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-red-500/20 blur-[50px] rounded-3xl"
                 animate={{
-                  opacity: [0.5, 0.8, 0.5],
-                  scale: [1, 1.05, 1],
+                  opacity: [0.4, 0.6, 0.4],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 6, // Increased from 4s for smoother animation
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
+                style={{ willChange: 'opacity' }}
               />
               
-              {/* Dashboard mockup with glassmorphism */}
-              <motion.div
-                className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/60 overflow-hidden"
+               {/* OPTIMIZED: Dashboard mockup with reduced blur effect
+                   - Reduced backdrop-blur from xl to md (lighter effect, better performance)
+                   - Removed 3D rotations (rotateY/rotateX) - use only scale for 60fps
+                   - Added will-change for optimization */}
+               <motion.div
+                className="relative bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-200/60 overflow-hidden"
                 whileHover={{ 
                   scale: 1.02,
-                  rotateY: 2,
-                  rotateX: -2,
                 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                style={{ willChange: 'transform' }}
               >
                 <div className="p-4 md:p-6">
                   <motion.img
@@ -223,54 +233,58 @@ export const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* Floating info cards with staggered animation */}
-              <motion.div
-                className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/60 p-4 md:p-5"
+               {/* OPTIMIZED: Floating info cards with reduced animations
+                   - Reduced backdrop-blur from xl to md
+                   - Reduced floating animation from 3px range to subtle
+                   - Increased duration to reduce repaints
+                   - Only animate opacity on mount, not continuous floating */}
+               <motion.div
+                className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/60 p-4 md:p-5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
+                style={{ willChange: 'opacity' }}
               >
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <div className="text-sm text-gray-600 font-medium">Today's Volume</div>
-                  <div className="text-2xl md:text-3xl font-bold text-gray-900 mt-1">4,847 <span className="text-lg text-gray-600">tons</span></div>
-                  <div className="text-xs text-green-600 font-medium mt-1">↑ 12% vs yesterday</div>
-                </motion.div>
+                {/* Removed continuous floating animation - replaced with static content
+                    Floating animations are expensive and reduce from 60fps to lower rates */}
+                <div className="text-sm text-gray-600 font-medium">Today's Volume</div>
+                <div className="text-2xl md:text-3xl font-bold text-gray-900 mt-1">4,847 <span className="text-lg text-gray-600">tons</span></div>
+                <div className="text-xs text-green-600 font-medium mt-1">↑ 12% vs yesterday</div>
               </motion.div>
 
               <motion.div
-                className="absolute -top-6 -right-6 bg-gradient-to-br from-green-50 to-emerald-50 backdrop-blur-xl rounded-2xl shadow-xl border border-green-200/60 p-4 md:p-5"
+                className="absolute -top-6 -right-6 bg-gradient-to-br from-green-50 to-emerald-50 backdrop-blur-md rounded-2xl shadow-lg border border-green-200/60 p-4 md:p-5"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.4 }}
+                style={{ willChange: 'opacity' }}
               >
-                <motion.div
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <div className="text-sm text-gray-600 font-medium">Efficiency Gain</div>
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mt-1">+32%</div>
-                  <div className="text-xs text-gray-600 font-medium mt-1">This month</div>
-                </motion.div>
+                {/* Removed continuous floating animation */}
+                <div className="text-sm text-gray-600 font-medium">Efficiency Gain</div>
+                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mt-1">+32%</div>
+                <div className="text-xs text-gray-600 font-medium mt-1">This month</div>
               </motion.div>
             </div>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* OPTIMIZED: Scroll indicator with reduced animation
+          - Increased duration from 1.5s to 3s (less frequent repaints)
+          - Reduced y range from 8px to 4px
+          - Uses only transform (GPU accelerated) */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.5 }}
+        style={{ willChange: 'opacity' }}
       >
         <motion.div
           className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ willChange: 'transform' }}
         >
           <motion.div className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
         </motion.div>

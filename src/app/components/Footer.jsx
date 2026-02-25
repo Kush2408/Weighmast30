@@ -1,6 +1,7 @@
+import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
-import logoImage from 'figma:asset/68c60041409e12e179fd61705a4bf2b494174d70.png';
+import logoImage from './figma/WeighMAST.webp';
 
 export const Footer = () => {
   const footerLinks = {
@@ -8,7 +9,6 @@ export const Footer = () => {
       { label: 'Features', href: '#features' },
       { label: 'Benefits', href: '#benefits' },
       { label: 'Solutions', href: '#solutions' },
-      { label: 'Pricing', href: '#pricing' },
       { label: 'Integrations', href: '#integrations' },
     ],
     Company: [
@@ -50,9 +50,9 @@ export const Footer = () => {
     <footer className="relative bg-gradient-to-b from-white to-gray-50 border-t border-gray-200/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-20">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-12 mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-1 lg:col-span-2">
             <motion.div
               className="mb-6"
               initial={{ opacity: 0, y: 20 }}
@@ -60,8 +60,8 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <img src={logoImage} alt="Weighmast" className="h-8 w-auto mb-4" />
-              <p className="text-gray-600 leading-relaxed">
+              <img src={logoImage} alt="Weighmast" className="h-8 w-auto mb-4" loading='lazy'/>
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base">
                 Complete weighbridge management software for modern businesses. 
                 Streamline operations, ensure accuracy, and boost efficiency.
               </p>
@@ -118,29 +118,29 @@ export const Footer = () => {
 
         {/* Newsletter Section */}
         <motion.div
-          className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl border border-blue-200/50 p-8 mb-12"
+          className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl md:rounded-3xl border border-blue-200/50 p-6 md:p-8 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                 Stay Updated
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm md:text-base text-gray-600">
                 Get the latest news, updates, and tips delivered to your inbox.
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-3 py-2 md:px-4 md:py-3 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
               <motion.button
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 text-white rounded-full hover:shadow-lg transition-all duration-300 font-semibold whitespace-nowrap"
+               className="px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white rounded-full shadow-md hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 font-semibold text-sm md:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -151,9 +151,9 @@ export const Footer = () => {
         </motion.div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-gray-200/50">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 pt-6 md:pt-8 border-t border-gray-200/50">
           <motion.p
-            className="text-gray-600 text-sm"
+            className="text-gray-600 text-xs md:text-sm text-center md:text-left"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

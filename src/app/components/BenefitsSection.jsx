@@ -1,5 +1,5 @@
+import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
 import { 
   TrendingUp, 
   Target, 
@@ -12,12 +12,52 @@ import {
   CheckCircle2,
   Award
 } from 'lucide-react';
-import completeTransactionImage from 'figma:asset/b136b9bf5aa6814efa9381f86612ac798e688b3b.png';
-import activeTransactionImage from 'figma:asset/bd316fcdbe7c2f2f437291dc4bf76861ec1b3811.png';
+import completeTransactionImage from './figma/completetransactionlist.webp';
+import activeTransactionImage from './figma/activetransactonlist.webp';
 
 export const BenefitsSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  // Color mapping for dynamic styles
+  const colorMap = {
+    blue: { 
+      bg: '#0ea5e9', 
+      bgLight: 'rgba(14, 165, 233, 0.1)', 
+      bgLighter: 'rgba(14, 165, 233, 0.05)',
+      hoverOverlay: 'rgba(14, 165, 233, 0.05), rgba(14, 165, 233, 0.1)'
+    },
+    green: { 
+      bg: '#22c55e', 
+      bgLight: 'rgba(34, 197, 94, 0.1)', 
+      bgLighter: 'rgba(34, 197, 94, 0.05)',
+      hoverOverlay: 'rgba(34, 197, 94, 0.05), rgba(34, 197, 94, 0.1)'
+    },
+    red: { 
+      bg: '#ef4444', 
+      bgLight: 'rgba(239, 68, 68, 0.1)', 
+      bgLighter: 'rgba(239, 68, 68, 0.05)',
+      hoverOverlay: 'rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.1)'
+    },
+    purple: { 
+      bg: '#a855f7', 
+      bgLight: 'rgba(168, 85, 247, 0.1)', 
+      bgLighter: 'rgba(168, 85, 247, 0.05)',
+      hoverOverlay: 'rgba(168, 85, 247, 0.05), rgba(168, 85, 247, 0.1)'
+    },
+    orange: { 
+      bg: '#f97316', 
+      bgLight: 'rgba(249, 115, 22, 0.1)', 
+      bgLighter: 'rgba(249, 115, 22, 0.05)',
+      hoverOverlay: 'rgba(249, 115, 22, 0.05), rgba(249, 115, 22, 0.1)'
+    },
+    indigo: { 
+      bg: '#6366f1', 
+      bgLight: 'rgba(99, 102, 241, 0.1)', 
+      bgLighter: 'rgba(99, 102, 241, 0.05)',
+      hoverOverlay: 'rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.1)'
+    },
+  };
 
   const benefits = [
     {
@@ -132,27 +172,33 @@ export const BenefitsSection = () => {
               >
                 {/* Gradient overlay on hover */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br from-${benefit.color}-500/5 to-${benefit.color}-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
+                  style={{
+                    background: `linear-gradient(135deg, ${colorMap[benefit.color].hoverOverlay})`,
+                  }}
                 />
 
                 <div className="relative z-10">
-                  {/* Icon and Stat */}
-                  <div className="flex items-start justify-between mb-6">
-                    <motion.div
-                      className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-${benefit.color}-500/10 to-${benefit.color}-600/20 flex items-center justify-center`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <benefit.icon className={`w-7 h-7 text-${benefit.color}-600`} />
-                    </motion.div>
+                   {/* Icon and Stat */}
+                   <div className="flex items-start justify-between mb-6">
+                     <motion.div
+                       className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                       style={{
+                         background: `linear-gradient(to bottom right, ${colorMap[benefit.color].bgLight}, ${colorMap[benefit.color].bgLighter})`,
+                       }}
+                       whileHover={{ scale: 1.1, rotate: 5 }}
+                       transition={{ duration: 0.3 }}
+                     >
+                       <benefit.icon className="w-7 h-7" style={{ color: colorMap[benefit.color].bg }} />
+                     </motion.div>
 
-                    <div className="text-right">
-                      <div className={`text-3xl font-bold bg-gradient-to-r from-${benefit.color}-600 to-${benefit.color}-700 bg-clip-text text-transparent`}>
-                        {benefit.stat}
-                      </div>
-                      <div className="text-xs text-gray-600 font-medium">{benefit.statLabel}</div>
-                    </div>
-                  </div>
+                     <div className="text-right">
+                       <div className="text-3xl font-bold" style={{ color: colorMap[benefit.color].bg }}>
+                         {benefit.stat}
+                       </div>
+                       <div className="text-xs text-gray-600 font-medium">{benefit.statLabel}</div>
+                     </div>
+                   </div>
 
                   {/* Content */}
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -185,17 +231,21 @@ export const BenefitsSection = () => {
                 src={completeTransactionImage}
                 alt="Transaction Management"
                 className="w-full h-auto"
+                loading='lazy'
               />
               <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent" />
             </motion.div>
 
-            {/* Floating badge */}
+            {/* OPTIMIZED: Floating badge with reduced shadow
+                - Reduced shadow from shadow-xl to shadow-lg
+                - Added will-change for optimization */}
             <motion.div
-              className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl border border-gray-200/60 p-6"
+              className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-lg border border-gray-200/60 p-6"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.8 }}
               whileHover={{ scale: 1.05 }}
+              style={{ willChange: 'transform' }}
             >
               <div className="text-sm text-gray-600 font-medium">Monthly Savings</div>
               <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">

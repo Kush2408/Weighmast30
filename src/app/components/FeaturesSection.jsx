@@ -1,5 +1,5 @@
+import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
 import { 
   Scale, 
   Camera, 
@@ -14,9 +14,9 @@ import {
   CheckCircle2,
   Lock
 } from 'lucide-react';
-import vehicleManagementImage from 'figma:asset/fae6dc4657801e865cf4c014901a6e4fdae85b64.png';
-import transactionViewImage from 'figma:asset/bd316fcdbe7c2f2f437291dc4bf76861ec1b3811.png';
-import userManagementImage from 'figma:asset/011d9be72b3c099fe9856c94cfb6c105d9113538.png';
+import vehicleManagementImage from './figma/vehiclemaster.webp';
+import transactionViewImage from './figma/completetransactionlist.webp';
+import userManagementImage from './figma/usermanagementadd.webp';
 
 export const FeaturesSection = () => {
   const sectionRef = useRef(null);
@@ -147,7 +147,7 @@ export const FeaturesSection = () => {
                   {feature.description}
                 </p>
 
-                {/* Feature Image Preview */}
+                {/* OPTIMIZED: Feature Image Preview with lazy loading */}
                 <div className="relative overflow-hidden rounded-xl border border-gray-200/60 aspect-video">
                   <motion.img
                     src={feature.image}
@@ -155,6 +155,7 @@ export const FeaturesSection = () => {
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.4 }}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>

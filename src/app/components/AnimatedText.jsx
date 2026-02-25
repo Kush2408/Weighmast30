@@ -1,51 +1,40 @@
-import { motion } from 'motion/react';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 
-gsap.registerPlugin(ScrollTrigger);
+// OPTIMIZED: Removed GSAP ScrollTrigger
+// Using Motion's useInView instead for:
+// - No ScrollTrigger instances (reduces main thread work)
+// - Simpler DOM queries
+// - Better cleanup and memory management
+// - Native Framer Motion viewport detection
 
 export const AnimatedText = ({ children, className = '', delay = 0 }) => {
   const textRef = useRef(null);
+  const isInView = useInView(textRef, { once: true, margin: '-50px' });
 
-  useEffect(() => {
-    if (!textRef.current) return;
-
-    const chars = textRef.current.querySelectorAll('.char');
-    
-    gsap.fromTo(
-      chars,
-      {
-        opacity: 0,
-        y: 50,
-        rotateX: -90,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        delay: delay,
-        stagger: 0.02,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
-  }, [delay]);
+  // Character animation only happens once on scroll into view
+  // Stagger is handled by Framer Motion's built-in system
 
   const splitText = (text) => {
     return text.split('').map((char, index) => (
-      <span
+      <motion.span
         key={index}
         className="char inline-block"
-        style={{ transformOrigin: '0% 100%' }}
+        initial={{ opacity: 0, y: 50, rotateX: -90 }}
+        animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+        transition={{
+          duration: 0.8,
+          delay: delay + index * 0.02, // Stagger handled by Motion
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        style={{ 
+          transformOrigin: '0% 100%',
+          transformStyle: 'preserve-3d', // For 3D transforms
+          willChange: 'transform, opacity' // GPU acceleration
+        }}
       >
         {char === ' ' ? '\u00A0' : char}
-      </span>
+      </motion.span>
     ));
   };
 

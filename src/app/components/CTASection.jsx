@@ -1,5 +1,5 @@
+import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
 import { ArrowRight, MessageSquare, Calendar, FileText } from 'lucide-react';
 import { MagneticButton } from './MagneticButton';
 
@@ -34,19 +34,23 @@ export const CTASection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-red-500" />
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjA1IiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30" />
 
-      {/* Floating orbs */}
+      {/* OPTIMIZED: Floating orb with reduced blur and longer duration
+          - Reduced blur from 100px to 60px
+          - Increased duration from 20s to 40s (half the animation frequency)
+          - Added willChange for GPU acceleration */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-[100px]"
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-[60px]"
         animate={{
           x: [0, 50, 0],
           y: [0, -30, 0],
           scale: [1, 1.2, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 40, // Increased from 20s
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{ willChange: 'transform' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -84,13 +88,13 @@ export const CTASection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <MagneticButton className="group px-8 py-4 bg-white text-gray-900 rounded-full hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold">
+            <MagneticButton className="group px-8 py-4 bg-white text-gray-900 rounded-full hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 font-semibold cursor-pointer">
               <span>Start Free Trial</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
 
             <motion.button
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 font-semibold"
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300 font-semibold cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

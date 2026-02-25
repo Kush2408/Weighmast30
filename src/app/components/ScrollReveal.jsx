@@ -1,7 +1,7 @@
+import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
 
-export const ScrollReveal = ({ 
+export const ScrollReveal = ({
   children, 
   delay = 0, 
   direction = 'up',

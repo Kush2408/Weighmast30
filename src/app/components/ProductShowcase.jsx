@@ -1,8 +1,8 @@
+import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
 import { Monitor, Smartphone, Globe, Shield } from 'lucide-react';
-import loginScreenImage from 'figma:asset/fc98608bb050845c9d70b7408ff05a3e35d61d8c.png';
-import receiptSettingsImage from 'figma:asset/53f5ecc7ce898b53d839b633507fffe0b1d61ee8.png';
+import loginScreenImage from './figma/login.webp'
+import receiptSettingsImage from './figma/receiptsetting.webp';
 
 export const ProductShowcase = () => {
   const sectionRef = useRef(null);
@@ -76,27 +76,33 @@ export const ProductShowcase = () => {
           style={{ scale, opacity }}
         >
           <div className="relative">
-            {/* Glow effect */}
+          {/* OPTIMIZED: Glow effect with reduced blur and longer animation
+              - Reduced blur from 100px to 60px
+              - Increased duration from 5s to 8s (less frequent repaints)
+              - Reduced opacity range */}
             <motion.div
-              className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-red-500/20 blur-[100px] rounded-3xl"
+              className="absolute -inset-8 bg-gradient-to-r from-blue-500/15 via-purple-500/15 to-red-500/15 blur-[60px] rounded-3xl"
               animate={{
-                opacity: [0.3, 0.6, 0.3],
-                scale: [1, 1.1, 1],
+                opacity: [0.3, 0.5, 0.3],
               }}
               transition={{
-                duration: 5,
+                duration: 8,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
+              style={{ willChange: 'opacity' }}
             />
 
-            {/* Main Image */}
+            {/* OPTIMIZED: Main Image with reduced backdrop blur
+                - Reduced backdrop-blur from xl to md
+                - Only scale animation (no 3D rotations) */}
             <motion.div
-              className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-gray-200/60 overflow-hidden"
+              className="relative bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-200/60 overflow-hidden"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, delay: 0.3 }}
               whileHover={{ scale: 1.01 }}
+              style={{ willChange: 'transform' }}
             >
               <div className="p-8">
                 <img
@@ -107,13 +113,16 @@ export const ProductShowcase = () => {
               </div>
             </motion.div>
 
-            {/* Floating Feature Card */}
+            {/* OPTIMIZED: Floating Feature Card with reduced blur and shadow
+                - Reduced backdrop-blur from xl to md
+                - Reduced shadow from xl to lg */}
             <motion.div
-              className="absolute -right-8 top-1/4 bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/60 p-6 max-w-xs hidden lg:block"
+              className="absolute -right-8 top-1/4 bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/60 p-6 max-w-xs hidden lg:block"
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
               whileHover={{ scale: 1.05, x: 5 }}
+              style={{ willChange: 'transform' }}
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/10 to-purple-600/10 flex items-center justify-center flex-shrink-0">

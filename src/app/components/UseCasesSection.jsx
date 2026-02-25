@@ -1,5 +1,5 @@
+import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { useRef } from 'react';
 import { 
   Factory, 
   Truck, 
@@ -11,8 +11,8 @@ import {
   PackageCheck,
   Zap
 } from 'lucide-react';
-import cameraManagementImage from 'figma:asset/189814275187fd9e0a9348c76224ac80bf9dbf3f.png';
-import barcodeSettingsImage from 'figma:asset/8a92f2376e47f9adfc039c1dd22a9f64bf3e6c3d.png';
+import cameraManagementImage from './figma/cameramaster.webp';
+import barcodeSettingsImage from './figma/barcode.webp';
 
 export const UseCasesSection = () => {
   const sectionRef = useRef(null);
@@ -222,30 +222,39 @@ export const UseCasesSection = () => {
 
           {/* Right - Images */}
           <div className="order-1 lg:order-2 relative">
+            {/* OPTIMIZED: Images with reduced shadow
+                - Reduced shadow from shadow-2xl to shadow-lg
+                - Removed 3D rotation (rotateY) - use only scale */}
             <motion.div
-              className="relative rounded-3xl overflow-hidden border border-gray-200/60 shadow-2xl"
-              whileHover={{ scale: 1.02, rotateY: -2 }}
+              className="relative rounded-3xl overflow-hidden border border-gray-200/60 shadow-lg"
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
+              style={{ willChange: 'transform' }}
             >
               <img
                 src={barcodeSettingsImage}
                 alt="Barcode Configuration"
                 className="w-full h-auto"
+                loading="lazy"
               />
             </motion.div>
 
-            {/* Floating secondary image */}
+            {/* OPTIMIZED: Floating secondary image with reduced shadow
+                - Reduced shadow from xl to lg
+                - Removed rotation animation */}
             <motion.div
-              className="absolute -bottom-8 -left-8 w-64 rounded-2xl overflow-hidden border border-gray-200/60 shadow-xl"
+              className="absolute -bottom-8 -left-8 w-64 rounded-2xl overflow-hidden border border-gray-200/60 shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.8 }}
-              whileHover={{ scale: 1.05, rotate: -2 }}
+              whileHover={{ scale: 1.05 }}
+              style={{ willChange: 'transform' }}
             >
               <img
                 src={cameraManagementImage}
                 alt="Camera Management"
                 className="w-full h-auto"
+                loading="lazy"
               />
             </motion.div>
           </div>
