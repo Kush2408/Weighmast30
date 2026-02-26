@@ -12,9 +12,11 @@
     #fdf4ff 100%
   );
   overflow: hidden;
-
   border-top: 1px solid rgba(168, 85, 247, 0.15);
   border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+
+  /* performance */
+  isolation: isolate;
 }
 
 /* Decorative top divider glow */
@@ -33,6 +35,7 @@
     transparent
   );
   z-index: 2;
+  pointer-events: none;
 }
 
 /* Soft gradient blobs */
@@ -46,11 +49,14 @@
   right: -200px;
   z-index: 0;
   filter: blur(90px);
+
+  /* GPU hint */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Additional subtle blob */
 .clients-section .blob-left {
-  content: "";
   position: absolute;
   width: 650px;
   height: 650px;
@@ -59,6 +65,9 @@
   left: -200px;
   z-index: 0;
   filter: blur(90px);
+
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .clients-container {
@@ -98,12 +107,15 @@
   -webkit-text-fill-color: transparent;
 
   animation: gradientShift 6s linear infinite;
+
+  /* performance */
+  will-change: background-position;
 }
 
 /* Smooth gradient animation */
 @keyframes gradientShift {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  from { background-position: 0% center; }
+  to { background-position: 200% center; }
 }
 
 .clients-description {
@@ -117,11 +129,8 @@
   color: #4b5563;
   font-weight: 400;
   letter-spacing: 0.4px;
-
   opacity: 0.9;
 }
-
-
 
 /* ============================= */
 /* ===== LogoLoop Container ==== */
@@ -134,20 +143,28 @@
 
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px);
-  border-radius: 32px;
+  -webkit-backdrop-filter: blur(20px);
 
+  border-radius: 32px;
   border: 1px solid rgba(168, 85, 247, 0.08);
 
   box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.5);
 
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.4s cubic-bezier(.4,0,.2,1);
+
+  /* performance */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 /* Hover lift effect */
 .logoloop:hover {
-  transform: translateY(-6px);
+  transform: translate3d(0, -6px, 0);
+
   box-shadow:
     0 25px 60px rgba(168, 85, 247, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
@@ -183,6 +200,8 @@
   display: flex;
   width: max-content;
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .logoloop__list {
@@ -202,7 +221,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
 }
 
 .logoloop__item img {
@@ -211,20 +232,24 @@
   object-fit: contain;
 
   filter: grayscale(100%);
-  opacity: 0.7;
+  opacity: 0.8;
 
-  transition: transform 0.4s cubic-bezier(.4,0,.2,1),
-              opacity 0.4s cubic-bezier(.4,0,.2,1),
-              filter 0.4s cubic-bezier(.4,0,.2,1);
+  transition:
+    opacity 0.4s cubic-bezier(.4,0,.2,1),
+    transform 0.4s cubic-bezier(.4,0,.2,1);
+
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Hover effect */
 .logoloop__item:hover img {
-  filter: grayscale(0%);
+  filter: none;
   opacity: 1;
   transform: scale(1.08);
 }
 
 .logoloop__item:hover {
-  transform: translateY(-6px);
+  transform: translate3d(0, -6px, 0);
 }
