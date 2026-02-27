@@ -14,7 +14,7 @@ import {
 import cameraManagementImage from './figma/cameramaster.webp';
 import barcodeSettingsImage from './figma/barcode.webp';
 
-export const UseCasesSection = () => {
+const UseCasesSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
 
@@ -322,3 +322,4 @@ export const UseCasesSection = () => {
     </section>
   );
 };
+export default UseCasesSection;

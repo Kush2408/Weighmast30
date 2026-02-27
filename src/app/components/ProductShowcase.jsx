@@ -4,7 +4,7 @@ import { Monitor, Smartphone, Globe, Shield } from 'lucide-react';
 import loginScreenImage from './figma/login.webp'
 
 
-export const ProductShowcase = () => {
+const ProductShowcase = () => {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
@@ -109,6 +109,7 @@ export const ProductShowcase = () => {
                   src={loginScreenImage}
                   alt="Weighmast Login Interface"
                   className="w-full h-auto rounded-2xl shadow-lg"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
@@ -163,3 +164,4 @@ export const ProductShowcase = () => {
     </section>
   );
 };
+export default ProductShowcase;

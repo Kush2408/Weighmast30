@@ -15,7 +15,7 @@ import {
   Lock,
 } from "lucide-react";
 
-export const FeaturesSection = () => {
+const FeaturesSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -239,3 +239,4 @@ export const FeaturesSection = () => {
     </section>
   );
 };
+export default FeaturesSection;

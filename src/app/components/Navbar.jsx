@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { Menu, X } from 'lucide-react';
-import logoImage from './figma/WeighMAST.webp';
+import logoImage from './figma/WeighMAST_1.webp';
 
-export const Navbar = () => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -73,16 +73,15 @@ export const Navbar = () => {
     []
   );
 
-  const requestDemoClasses = useMemo(
-    () =>
-      `px-6 py-3 rounded-[50px] font-semibold text-md transition-all duration-500 ${
-        isScrolled
-          ? 'bg-sky-100 text-sky-800 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-sky-600 hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'
-          : 'bg-white text-gray-900 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-purple-600 hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'
-      }`,
-    [isScrolled]
-  );
-
+const requestDemoClasses = useMemo(
+  () =>
+    `px-6 py-3 rounded-[50px] font-semibold text-md transition-all duration-500 ${
+      isScrolled
+        ? 'bg-transparent text-sky-800 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-gradient-to-r hover:from-[#0F4C81] hover:to-[#0F7173] hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'
+        : 'bg-transparent text-gray-900 shadow-[0_0_8px_rgba(0,0,0,0.05)] hover:bg-gradient-to-r hover:from-[#0F4C81] hover:to-[#0F7173] hover:text-white hover:shadow-[0_7px_29px_rgb(93,24,220)]'
+    }`,
+  [isScrolled]
+);
   return (
     <div className="flex items-center justify-between h-20 relative">
       <motion.nav
@@ -113,6 +112,7 @@ export const Navbar = () => {
                 <motion.img
                   src={logoImage}
                   alt="Weighmast"
+                  loading="lazy"
                   className="h-8 w-auto transition-all duration-300 group-hover:brightness-110"
                   initial={{ opacity: 0, filter: 'blur(10px)' }}
                   animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -163,7 +163,7 @@ export const Navbar = () => {
 
               <motion.a
                 href="#contact"
-                className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white rounded-full shadow-md hover:shadow-xl transition-all duration-300 font-semibold"
+                className="px-6 py-2.5 bg-gradient-to-r from-[#0F4C81] to-[#0F7173] text-white rounded-full shadow-md hover:shadow-xl transition-all duration-300 font-semibold"
                 whileHover={{
                   scale: 1.05,
                   boxShadow:
@@ -240,7 +240,7 @@ export const Navbar = () => {
 
             <a
               href="#contact"
-              className="block py-3 px-6 bg-gradient-to-r from-blue-600 via-purple-600 to-red-500 text-white rounded-full text-center hover:shadow-lg transition-all duration-300 font-medium"
+              className="block py-3 px-6 bg-gradient-to-r from-[#0F4C81] to-[#0F7173] text-white rounded-full text-center hover:shadow-lg transition-all duration-300 font-medium"
               onClick={closeMobileMenu}
             >
               Get Started
@@ -251,3 +251,4 @@ export const Navbar = () => {
     </div>
   );
 };
+export default Navbar;

@@ -6,10 +6,10 @@ import RIMJHIM from "./figma/RIMJHIM_23.webp";
 import Stallion from "./figma/Stallion_2.webp";
 
 const DEFAULT_LOGOS = [
-  { src: CEAT, alt: "CEAT" },
+  { src: CEAT, alt: "CEAT"},
   { src: ITPL, alt: "ITPL" },
   { src: RIMJHIM, alt: "RIMJHIM" },
-  { src: Stallion, alt: "Stallion" },
+  { src: Stallion, alt: "Stallion"},
 ];
 
 const ANIMATION_CONFIG = {

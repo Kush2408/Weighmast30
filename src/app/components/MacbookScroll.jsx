@@ -25,7 +25,7 @@ import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 
 
-export const MacbookScroll = ({
+const MacbookScroll = ({
     src,
     showGradient,
     title,
@@ -632,3 +632,4 @@ const AceternityLogo = () => {
         </svg>
     );
 };
+export default MacbookScroll;

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 
-export const ScrollReveal = ({
+const ScrollReveal = ({
   children, 
   delay = 0, 
   direction = 'up',
@@ -49,3 +49,4 @@ export const ScrollReveal = ({
     </motion.div>
   );
 };
+export default ScrollReveal;

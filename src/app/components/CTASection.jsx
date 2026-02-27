@@ -37,7 +37,7 @@ const ctaOptions = [
   },
 ];
 
-export const CTASection = () => {
+const CTASection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -181,3 +181,4 @@ export const CTASection = () => {
     </section>
   );
 };
+export default CTASection;

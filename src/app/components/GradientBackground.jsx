@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
-export const GradientBackground = () => {
+const GradientBackground = () => {
   // Respect user's motion preferences for accessibility and performance
   const prefersReducedMotion = useReducedMotion();
 
@@ -72,3 +72,4 @@ export const GradientBackground = () => {
     </div>
   );
 };
+export default GradientBackground;

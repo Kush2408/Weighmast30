@@ -8,7 +8,7 @@ import {
   Twitter,
   Facebook,
 } from "lucide-react";
-import logoImage from "./figma/WeighMAST.webp";
+import logoImage from "./figma/WeighMAST_1.webp";
 
 /* ─────────────────────────────────────────────
    Static Data (moved outside component)
@@ -86,7 +86,7 @@ const fadeIn = (delay = 0) => ({
   transition: { duration: 0.6, delay },
 });
 
-export const Footer = () => {
+const Footer = () => {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
@@ -221,3 +221,4 @@ export const Footer = () => {
     </footer>
   );
 };
+export default Footer;

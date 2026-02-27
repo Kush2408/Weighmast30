@@ -3,7 +3,7 @@ import { ArrowRight, Shield, Zap, BarChart3, CheckCircle2 } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
 import dashboardVideo from "./figma/dashboardanimated_P.mp4";
 
-export const HeroSection = () => {
+const HeroSection = () => {
   const videoRef = useRef(null);
 
   // Prevent video from blocking main thread on load
@@ -161,3 +161,4 @@ export const HeroSection = () => {
     </section>
   );
 };
+export default HeroSection;

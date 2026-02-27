@@ -8,7 +8,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 // - Better cleanup and memory management
 // - Uses transform only (GPU accelerated)
 
-export const ParallaxImage = ({ src, alt, speed = 0.5, className = '' }) => {
+const ParallaxImage = ({ src, alt, speed = 0.5, className = '' }) => {
   const containerRef = useRef(null);
   
   // useScroll creates a single scroll listener that's shared across the app
@@ -36,3 +36,4 @@ export const ParallaxImage = ({ src, alt, speed = 0.5, className = '' }) => {
     </div>
   );
 };
+export default ParallaxImage;
