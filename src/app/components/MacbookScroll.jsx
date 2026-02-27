@@ -51,7 +51,6 @@ const MacbookScroll = ({
     const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
     const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
     const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
     return (
         <div
             ref={ref}
